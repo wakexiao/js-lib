@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function myCall(context, ...args) {
+        const self = context || window;
+        self.fn = this;
+        const result = self.fn(...args);
+        delete self.fn;
+        return result;
+      }
+
+      function myBind(context, ...bindArgs) {
+        // 保存当前函数，因为bind需要返回一个新的函数，在新的函数里this指向会有问题
+        const self = this;
+        // 不使用原生的call方法，使用自己写的 myCall 方法
+        return function (...args) {
+          Function.prototype.myCall = myCall;
+          console.log([...bindArgs], [...args]);
+          return self.myCall(context, ...bindArgs, ...args);
+        };
+      }
+      Function.prototype.myBind = myBind;
+
+      let obj = {
+        name: 'jack',
+        age: 18,
+      };
+      function getAge(desc, desc1, desc2) {
+        console.log(desc, desc1, desc2);
+        return this.age;
+      }
+      let myGetAge = getAge.myBind(obj, 'myBind调用', '参数1');
+      console.log(getAge('正常调用', '参数1', '参数2'));
+      // 正常调用 参数1 参数2
+      // undefined
+      console.log(myGetAge('参数2'));
+      // myBind调用 参数1 参数2
+      // 18
+    </script>
+  </body>
+</html>

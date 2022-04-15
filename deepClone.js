@@ -16,6 +16,7 @@ const deepClone = (obj) => {
   if (obj === null) return obj; // 处理下方 typeof null 等于 'object' 的情况
   if (obj instanceof Date) return new Date(obj);
   if (obj instanceof RegExp) return new RegExp(obj);
+  let result = Array.isArray(obj) ? [] : {};
   if (typeof obj !== 'object') return obj;
   for (let key in obj) {
     if (obj.hasOwnProperty(key)) {
