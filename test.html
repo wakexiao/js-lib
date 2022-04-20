@@ -10,20 +10,54 @@
         background: red;
         width: 200px;
         height: 200px;
-        margin: 100px;
       }
-      #div{
+      /* #div{
         float: left;
         background: green;
+      } */
+      #parent{
+        width: 500px;
+        height: 500px;
+        background: blue;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
-      #div1{
-        display: inline-block;
+      /* #children{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      } */
+      /* #children{
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+      } */
+      .flex-box {
+        display: flex;
+        /* flex-flow: column wrap; */
+        justify-content: center;
+        align-items: stretch;
+        width: 500px;
+        height: 500px;
+        background: #000;
       }
     </style>
   </head>
   <body>
-    <div id="div">123123</div>
-    <div id="div1"></div>
+    <p id="p">123123</p>
+    <div id="parent">
+      <div id="children"></div>
+    </div>
+    <section class="flex-box">
+      <div></div>
+      <div></div>
+    </section>
     <script>
       function myCall(context, ...args) {
         const self = context || window;
