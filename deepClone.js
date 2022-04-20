@@ -27,3 +27,12 @@ const deepClone = (obj) => {
 };
 
 export default deepClone;
+
+
+// function Foo() {};
+// Foo.constructor -> Foo
+// let foo = new Foo();
+// foo.__proto__ -> Foo.prototype
+// Foo.__proto__ -> Object.prototype
+// Object.__proto__ -> null;
+
