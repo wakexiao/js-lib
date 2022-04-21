@@ -1,15 +1,15 @@
-## 一. HTML + CSS 面试题
+## 一. HTML + CSS
 > 一般 HTML 和 CSS 相关的面试题都问的会比较少；只挑了部分常问的问题做整理。
 
 ### 1.1 语义化的理解
-- 使页面内容结构化，便于浏览器和搜索引擎解析，利于 seo
-- 增加代码可读性，利于维护
-- 在没有css样式的情况下，页面也能呈现出很好的内容结构
+- 1. 使页面内容结构化，便于浏览器和搜索引擎解析，利于 seo
+- 2. 增加代码可读性，利于维护
+- 3. 在没有css样式的情况下，页面也能呈现出很好的内容结构
 
 ### 1.2 H5 新增的新特性
-- 语义化标签：section、header、footer、nav...
-- 智能表单：type = tel | email
-- 本地存储新增了 locaStorage 和 sectionStorage
+- 1. 语义化标签：section、header、footer、nav...
+- 2. 智能表单：type = tel | email
+- 3. 本地存储新增了 locaStorage 和 sectionStorage
 
 ### 1.3 script 标签中 defer 和 async 的区别
 - 当浏览器遇到 script 标签时会阻塞 HTML 解析，只有 JS 内容加载并执行完成之后才会继续解析 HTML 内容。
@@ -18,12 +18,12 @@
 > 总结：1. 什么属性都没有的 script 标签，在 HTML 中按顺序执行，会阻塞 HTML 解析，所以 JS 的 script 标签一般都放在 body 之后；2. 有 async 属性可能会造成 HTML 解析阻塞；有 defer 属性不会造成 HTML 解析阻塞；可以参考这篇文章：[图解 script 标签中的 async 和 defer 属性](https://juejin.cn/post/6894629999215640583)
 
 ### 1.4 从浏览器地址栏输入 url 到请求返回发生了什么
-- 浏览器先从本地查看是否有缓存，有缓存则直接解析渲染页面，否则进入到下一步
-- 浏览器解析协议，端口，域名组成一个 http 请求
-- 再通过 DNS 域名解析拿到 IP 地址
-- 建立 TCP 连接
-- 等待服务器响应请求并返回资源
-- 解析服务端返回的资源，解析 HTML 文档，构建 DOM 树，加载其他资源，构建 css 样式和执行 JS 脚本，最终渲染页面
+- 1. 浏览器先从本地查看是否有缓存，有缓存则直接解析渲染页面，否则进入到下一步
+- 2. 浏览器解析协议，端口，域名组成一个 http 请求
+- 3. 再通过 DNS 域名解析拿到 IP 地址
+- 4. 建立 TCP 连接
+- 5. 等待服务器响应请求并返回资源
+- 6. 解析服务端返回的资源，解析 HTML 文档，构建 DOM 树，加载其他资源，构建 css 样式和执行 JS 脚本，最终渲染页面
 
 ### 1.5 CSS 盒模型
 - CSS 中有两种盒模型：标准盒模型、(IE)怪异盒模型;
@@ -110,3 +110,81 @@ box-sizing: 'content-box'; // 标准盒模型(默认值)
 6. align-self属性允许单个项目有与其他项目不一样的对齐方式，可覆盖align-items属性。默认值为auto，表示继承父元素的align-items属性，如果没有父元素，则等同于stretch。
 
 > 第四个 flex 缩写的熟悉用的比较多；flex 详细介绍可以查看[阮一峰flex教程](https://www.ruanyifeng.com/blog/2015/07/flex-grammar.html)
+
+## 二、JS 基础
+
+### 2.1 JS 的数据类型
+- JS 中有两种数据类型：基本数据类型(简单数据类型/原始数据) 和 引用数据类型(复杂数据类型)
+1. [七种基本数据类型](https://developer.mozilla.org/zh-CN/docs/Glossary/Primitive)：
+`string`、`number`、`boolean`、`undefined`、`null`、`symbol`、`bigint`
+2. 一种引用数据类型：`Object`
+> 在 js 中，array、function、object、Date 等都归类为 Object，通过 typeof 判断类型，这些返回的都是 object 字符串，但是 typeof null 也是 object，这是特例。
+
+### 2.2 原型和原型链
+> 每个构造函数都有一个 prototype 指向原型对象，原型对象有一个 constructor 属性指回构造函数，而通过构造函数实例出来的对象有一个 __proto__ 属性指向构造函数的 prototype，在实例自身没有找到属性的时候，会通过原型链一层一层的往上找，最终找到顶层 null。
+```js
+function Person(name, age){
+  this.name = name;
+  this.age = age;
+};
+Person.prototype.field = 'ps';
+const person = new Person('jack', 18);
+console.log(person); // {name: 'jack', age: 18}
+console.log(person.field); // ps
+// 通过构造函数创建出来的实例对象会有一个 __proto__ 属性，指向构造函数的原型对象 peototype
+// 如果自身没有这个属性则会通过原型链往上层找
+console.log(person.__proto__ === Person.prototype);
+// 构造函数的 prototype.constructor 指向 构造函数本身
+console.log(Person.prototype.constructor === Person);
+console.log(Person.prototype.__proto__ === Function.prototype);
+// 构造函数原型对象上的 __proto__ 指向 Object 的原型对象，构造函数本身也是一个对象
+console.log(Person.prototype.__proto__ === Object.prototype);
+// 对象原型上的 __proto__ 属性指向 null，原型链的顶层就是 null 
+console.log(Object.prototype.__proto__ === null);
+```
+- 实现类似一个 instanceof 方法
+```js
+/**
+ * 实现类似 instanceof 方法
+ * @param {object} left 需要判断的对象
+ * @param {object} right 是否属于该原型对象
+ * @return boolean
+ */
+export default function instance_of(left, right){
+  const baseTypes = ['string', 'number', 'boolean', 'undefined', 'symbol'];
+  if(baseTypes.includes(typeof left)) return false;
+  let leftProto = left.__proto__;
+  let rightPrototype = right.prototype;
+  while(true){
+    if(leftProto === null) { // 已经通过原型链找到顶层 null 还没找到
+      return false;
+    }
+    if(leftProto === rightPrototype) {
+      return true;
+    }
+    // 没找到，再往上一层找
+    leftProto = leftProto.__proto__;
+  }
+}
+```
+
+### 2.3 new 操作符做了什么
+- 1. 首先创建有一个空对象
+- 2. 根据原型链，设置空对象的 `__proto__` 指向构造函数的 `prototype`
+- 3. 构造函数的 `this` 指向这个对象并且执行该构造函数(这个构造函数可能通过this挂在了其他属性)
+- 4. 把执行之后返回的对象 return 出去(需要判断执行构造函数返回的是否是一个对象，如果是正常返回，不是返回空对象)
+
+```js
+function myNew(context) {
+  const obj = {}; // 创建一个新对象
+  // 将新对象的 __proto__ 指向构造函数的 prototype
+  obj.__proto__ = context.prototype;
+  // 绑定构造函数的 this 并且执行
+  const result = context.apply(obj, [...arguments].slice(1));
+  // 把构造函数返回的值 return 出去，如果执行构造函数之后返回的是一个对象，直接返回，如果不是对象返回一个空对象
+  return result instanceof Object ? result : obj;
+}
+```
+### 2.4 call、apply、bind 的区别和实现
+> 可以看我这篇文章，很容易理解：[call、apply、bind 的区别和手写，猴子看了都懂！](https://juejin.cn/post/7086474161555505166)
+

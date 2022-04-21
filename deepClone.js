@@ -26,6 +26,8 @@ const deepClone = (obj) => {
   return result;
 };
 
+// ECMAScript 2021 新 api structuredClone 也可以实现深拷贝
+
 export default deepClone;
 
 

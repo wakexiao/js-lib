@@ -15,7 +15,7 @@
         float: left;
         background: green;
       } */
-      #parent{
+      #parent {
         width: 500px;
         height: 500px;
         background: blue;
@@ -94,24 +94,66 @@
       console.log(myGetAge('参数2'));
       // myBind调用 参数1 参数2
       // 18
-      div.addEventListener('click', (e) => {
-        console.log(e)
-        console.log(e.type)
-      })
 
       function deepClone(obj) {
-        if(obj === null) return obj;
-        if(obj instanceof Date) return new Date(obj);
-        if(obj instanceof RegExp) return new RegExp(obj);
-        if(typeof obj !== 'object') return obj;
+        if (obj === null) return obj;
+        if (obj instanceof Date) return new Date(obj);
+        if (obj instanceof RegExp) return new RegExp(obj);
+        if (typeof obj !== 'object') return obj;
         let result = Array.isArray(obj) ? [] : {};
-        for(let key in obj) {
-          if(obj.hasOwnProperty(key)) {
+        for (let key in obj) {
+          if (obj.hasOwnProperty(key)) {
             result[key] = deepClone(obj[key]);
           }
         }
         return result;
       }
+
+      function Person(name, age) {
+        this.name = name;
+        this.age = age;
+      }
+      Person.prototype.field = 'ps';
+      const person = new Person('jack', 18);
+      console.log(person); // {name: 'jack', age: 18}
+      console.log(person.field); // ps
+      // 通过构造函数创建出来的实例对象会有一个 __proto__ 属性，指向构造函数的原型对象 peototype
+      // 如果自身没有这个属性则会通过原型链往上层找
+      console.log(person.__proto__ === Person.prototype);
+      // 构造函数的 prototype.constructor 指向 构造函数本身
+      console.log(Person.prototype.constructor === Person);
+      console.log(Person.__proto__ === Function.prototype);
+      // 构造函数原型对象上的 __proto__ 指向 Object 的原型对象，构造函数本身也是一个对象
+      console.log(Person.prototype.__proto__ === Object.prototype);
+      // 对象原型上的 __proto__ 属性指向 null，原型链的顶层就是 null
+      console.log(Object.prototype.__proto__ === null);
+      console.log(person.__proto__.__proto__ === Object.prototype);
+
+      function asyncFn() {
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            console.log('过了两秒我出来了！！');
+            resolve('我是第一个 resolve');
+          }, 2000);
+        })
+          .then((res) => {
+            console.log('then1', res);
+            return 'then return';
+          })
+          .then((res) => {
+            console.log('then2', res);
+            return 'then2 return';
+          })
+          .then((res) => {
+            console.log('then3', res);
+            return 'then3 return';
+          })
+      }
+      async function syncFn(){
+        const data = await asyncFn();
+        console.log('data', data)
+      }
+      syncFn()
     </script>
   </body>
 </html>

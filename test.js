@@ -50,13 +50,13 @@ console.log(myGetName);
 console.log(obj);
 console.log(myGetName('myBind 新方法调用'));
 
-const info ={
+const info = {
   name: 'jack',
   age: 18,
-}
-function fn(desc1, desc2, desc3){
+};
+function fn(desc1, desc2, desc3) {
   console.log(`我会${desc1}, 还会${desc2}, 也会${desc3}`);
-  console.log(this.age);
+  console.log(this?.age);
 }
 fn('唱歌', '跳舞');
 // 我会唱歌, 还会跳舞
@@ -72,3 +72,16 @@ const newFn = fn.bind(info, '上班', '摸鱼');
 newFn('加班');
 // 我会上班, 还会摸鱼, 也会加班
 // 18
+
+function Person(name, age) {
+  this.name = name;
+  this.age = age;
+}
+Person.prototype.field = 'ps';
+const person = new Person('jack', 18);
+console.log('person', _.instance_of(person, Person));
+console.log('object', _.instance_of(person, Object));
+console.log('error', _.instance_of(info, Person));
+
+const person1 = _.myNew(Person, 'tom', 20);
+console.log(person1);
