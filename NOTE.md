@@ -121,7 +121,9 @@ box-sizing: 'content-box'; // 标准盒模型(默认值)
 > 在 js 中，array、function、object、Date 等都归类为 Object，通过 typeof 判断类型，这些返回的都是 object 字符串，但是 typeof null 也是 object，这是特例。
 
 ### 2.2 原型和原型链
-> 每个构造函数都有一个 prototype 指向原型对象，原型对象有一个 constructor 属性指回构造函数，而通过构造函数实例出来的对象有一个 __proto__ 属性指向构造函数的 prototype，在实例自身没有找到属性的时候，会通过原型链一层一层的往上找，最终找到顶层 null。
+>  每个构造函数身上都有一个 prototype 对象，也就是该构造函数的原型对象，prototype 对象中有一个 constructor 属性，constructor 属性指回该构造函数本身；每一个实例对象上有一个 __proto__ 属性指向构造函数的 prototype，在实例自身没有找到属性的时候，会通过原型链一层一层的往上找，最终找到顶层 null 为止。
+
+> 除了undefined、null 之外，万物皆有 __proto__，只有 function 才会有 prototype；
 ```js
 function Person(name, age){
   this.name = name;
@@ -136,7 +138,7 @@ console.log(person.field); // ps
 console.log(person.__proto__ === Person.prototype);
 // 构造函数的 prototype.constructor 指向 构造函数本身
 console.log(Person.prototype.constructor === Person);
-console.log(Person.prototype.__proto__ === Function.prototype);
+console.log(Person.__proto__ === Function.prototype);
 // 构造函数原型对象上的 __proto__ 指向 Object 的原型对象，构造函数本身也是一个对象
 console.log(Person.prototype.__proto__ === Object.prototype);
 // 对象原型上的 __proto__ 属性指向 null，原型链的顶层就是 null 

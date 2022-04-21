@@ -5,6 +5,7 @@ import myCall from './myCall.js';
 import myBind from './myBind.js';
 import instance_of from './instance_of.js';
 import myNew from './myNew.js';
+import promiseAll from './promiseAll.js';
 
 export default {
   ...getUrlParams,
@@ -14,4 +15,5 @@ export default {
   myBind,
   instance_of,
   myNew,
+  promiseAll,
 };

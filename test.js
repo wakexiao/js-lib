@@ -85,3 +85,21 @@ console.log('error', _.instance_of(info, Person));
 
 const person1 = _.myNew(Person, 'tom', 20);
 console.log(person1);
+
+const p1 = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve(11111);
+  }, 3000);
+});
+const p2 = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve(22222);
+  }, 1000);
+});
+_.promiseAll([p1, 123, p2])
+  .then((res) => {
+    console.log('then', res);
+  })
+  .catch((err) => {
+    console.log('catch', err);
+  });
