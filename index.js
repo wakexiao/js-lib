@@ -6,6 +6,8 @@ import myBind from './myBind.js';
 import instance_of from './instance_of.js';
 import myNew from './myNew.js';
 import promiseAll from './promiseAll.js';
+import debounce from './debounce.js';
+import throttle from './throttle.js';
 
 export default {
   ...getUrlParams,
@@ -16,4 +18,6 @@ export default {
   instance_of,
   myNew,
   promiseAll,
+  debounce,
+  throttle,
 };

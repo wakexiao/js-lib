@@ -6,20 +6,105 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>js 常用方法库</title>
     <style>
-      div:after {
-        position: absolute;
+      #box {
+        /* position: absolute; */
         width: 0px;
         height: 0px;
         content: ' ';
+        display: block;
         border-right: 100px solid red;
         border-top: 100px solid #ff0;
         border-left: 100px solid blue;
         border-bottom: 100px solid green;
       }
+      #select {
+        user-select: none; /* 禁止用户选择文本 */
+      }
+      .taiji {
+        margin: 10px;
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        border: 1px solid #000;
+        overflow: hidden; /* 创建 BFC 并且隐藏左右两边非圆区域 */
+        position: relative;
+        animation: customRotate 5s linear infinite;
+      }
+      .left {
+        float: left;
+        width: 100px;
+        height: 100%;
+        background: #000;
+      }
+      .rigth {
+        float: right;
+        width: 100px;
+        height: 100%;
+        background: #fff;
+      }
+      .top {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background: #000;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      .bottom {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background: #000;
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #fff;
+      }
+      .children {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: #000;
+      }
+      .top .children {
+        background: #fff;
+      }
+      @keyframes customRotate {
+        from {
+          transform: rotate(0deg)
+        }
+        to {
+          transform: rotate(360deg)
+        }
+        /* 100% {
+          transform: rotate(360deg)
+        } */
+      }
+
     </style>
   </head>
   <body>
-    <div></div>
+    <div id="select">的房价按客服静安寺房间爱上咖啡就</div>发送到发事发地点啊发生的
+    <div id="box" draggable="true"></div>
+    <input id="search" type="text"> 搜索
+
+    <div class="taiji">
+      <div class="left"></div>
+      <div class="right"></div>
+      <div class="top">
+        <div class="children"></div>
+      </div>
+      <div class="bottom">
+        <div class="children"></div>
+      </div>
+    </div>
     <script type="module" src="./test.js"></script>
   </body>
 </html>

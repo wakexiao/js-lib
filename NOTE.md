@@ -117,6 +117,7 @@ box-sizing: 'content-box'; // 标准盒模型(默认值)
 - JS 中有两种数据类型：基本数据类型(简单数据类型/原始数据) 和 引用数据类型(复杂数据类型)
 1. [七种基本数据类型](https://developer.mozilla.org/zh-CN/docs/Glossary/Primitive)：
 `string`、`number`、`boolean`、`undefined`、`null`、`symbol`、`bigint`
+
 2. 一种引用数据类型：`Object`
 > 在 js 中，array、function、object、Date 等都归类为 Object，通过 typeof 判断类型，这些返回的都是 object 字符串，但是 typeof null 也是 object，这是特例。
 
