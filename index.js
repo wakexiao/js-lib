@@ -8,6 +8,7 @@ import myNew from './myNew.js';
 import promiseAll from './promiseAll.js';
 import debounce from './debounce.js';
 import throttle from './throttle.js';
+import MyPromise from './promise.js';
 
 export default {
   ...getUrlParams,
@@ -20,4 +21,5 @@ export default {
   promiseAll,
   debounce,
   throttle,
+  MyPromise,
 };

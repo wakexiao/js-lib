@@ -117,3 +117,34 @@ searchInput.addEventListener('input', _.debounce((e) => {
 box.addEventListener('drag', _.throttle((e) => {
   console.log(e.offsetX, e.offsetY)
 }, 100))
+
+
+const p = new Promise((resove, reject) => {
+  resove(1)
+}).then(res => {
+  console.log(res)
+}).then(res1 => {
+  console.log(res1)
+})
+
+console.log('第一步')
+const myP = new _.MyPromise((resolve, reject) => {
+  // console.log(this)
+  console.log('第二步')
+  // resolve('这次一定')
+  // throw Error('白嫖了')
+  // reject('这次一定')
+  setTimeout(() => {
+    resolve('这次一定')
+    console.log('第四步')
+  }, 3000)
+})
+myP.then((res) => {
+  console.log(res)
+  return '我要白嫖'
+}, (err) => {
+  console.log(err);
+}).then((res1) => {
+  console.log(res1) // 这里链式调用是使用的旧的 MyPromise 实例，需要返回一个新的 MyPromise 实例
+})
+console.log('第三步')
