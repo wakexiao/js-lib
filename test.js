@@ -119,13 +119,13 @@ box.addEventListener('drag', _.throttle((e) => {
 }, 100))
 
 
-const p = new Promise((resove, reject) => {
-  resove(1)
-}).then(res => {
-  console.log(res)
-}).then(res1 => {
-  console.log(res1)
-})
+// const p = new Promise((resove, reject) => {
+//   resove(1)
+// }).then(res => {
+//   console.log(res)
+// }).then(res1 => {
+//   console.log(res1)
+// })
 
 console.log('第一步')
 const myP = new _.MyPromise((resolve, reject) => {
