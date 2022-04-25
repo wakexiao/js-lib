@@ -115,19 +115,19 @@
       }
       Person.prototype.field = 'ps';
       const person = new Person('jack', 18);
-      console.log(person); // {name: 'jack', age: 18}
-      console.log(person.field); // ps
-      // 通过构造函数创建出来的实例对象会有一个 __proto__ 属性，指向构造函数的原型对象 peototype
-      // 如果自身没有这个属性则会通过原型链往上层找
-      console.log(person.__proto__ === Person.prototype);
-      // 构造函数的 prototype.constructor 指向 构造函数本身
-      console.log(Person.prototype.constructor === Person);
-      console.log(Person.__proto__ === Function.prototype);
-      // 构造函数原型对象上的 __proto__ 指向 Object 的原型对象，构造函数本身也是一个对象
-      console.log(Person.prototype.__proto__ === Object.prototype);
-      // 对象原型上的 __proto__ 属性指向 null，原型链的顶层就是 null
-      console.log(Object.prototype.__proto__ === null);
-      console.log(person.__proto__.__proto__ === Object.prototype);
+      // console.log(person); // {name: 'jack', age: 18}
+      // console.log(person.field); // ps
+      // // 通过构造函数创建出来的实例对象会有一个 __proto__ 属性，指向构造函数的原型对象 peototype
+      // // 如果自身没有这个属性则会通过原型链往上层找
+      // console.log(person.__proto__ === Person.prototype);
+      // // 构造函数的 prototype.constructor 指向 构造函数本身
+      // console.log(Person.prototype.constructor === Person);
+      // console.log(Person.__proto__ === Function.prototype);
+      // // 构造函数原型对象上的 __proto__ 指向 Object 的原型对象，构造函数本身也是一个对象
+      // console.log(Person.prototype.__proto__ === Object.prototype);
+      // // 对象原型上的 __proto__ 属性指向 null，原型链的顶层就是 null
+      // console.log(Object.prototype.__proto__ === null);
+      // console.log(person.__proto__.__proto__ === Object.prototype);
 
       function promiseAll(promises) {
         return new Promise((resolve, reject) => {
@@ -159,17 +159,85 @@
           resolve(22222);
         }, 1000);
       });
-      promiseAll([p1, 123, p2])
-        .then((res) => {
-          console.log('then', res);
-        })
-        .catch((err) => {
-          console.log('catch', err);
+      // promiseAll([p1, 123, p2])
+      //   .then((res) => {
+      //     console.log('then', res);
+      //   })
+      //   .catch((err) => {
+      //     console.log('catch', err);
+      //   });
+      //   let arr = [1,2,3]
+      //   for(let i = 0; i<arr.length; i++) {
+      //     console.log(i)
+      //   }
+
+      const tree = {
+        children: [
+          {
+            index: 0,
+            children: [
+              {
+                index: 1,
+                children: [
+                  {
+                    index: 3,
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            index: 4,
+          },
+          {
+            index: 5,
+            children: [
+              {
+                index: 7,
+                children: [
+                  {
+                    index: 8,
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            index: 6,
+          },
+        ],
+      };
+
+      function dfs(node, nodeList = []) {
+        if (!node) return;
+        console.log(node.index);
+        nodeList.push(node);
+        let children = node.children || [];
+        children.forEach((item) => {
+          dfs(item, nodeList);
         });
-        let arr = [1,2,3]
-        for(let i = 0; i<arr.length; i++) {
-          console.log(i)
+        return nodeList
+      }
+      console.log(dfs(tree, []))
+      function dfs2(node) {
+        let nodes = [];
+        let stack = [];
+        if(node) {
+          stack.push(node);
+          while(stack.length) {
+            let cur = stack.pop();
+            nodes.push(cur);
+            let children = cur.children || [];
+            // 因为上面是 pop，所以这里得从最后面开始遍历 push 进去
+            // unshift 性能不好
+            for(let i = children.length - 1; i >= 0; i--) {
+              stack.push(children[i]);
+            }
+          }
         }
+        return nodes;
+      }
+      console.log(dfs2(tree))
     </script>
   </body>
 </html>
