@@ -19,13 +19,20 @@ function myCall(context){
   // 取出传递的参数
   const args = [...arguments].slice(1);
   // 如果没有传需要绑定的对象，就指向 window
-  const self = context || window;
+  // let self = context || window;
+  if(context == null) { // 处理 null 和 undefined 情况
+    context = globalThis;
+  }
+  if(typeof context !== 'object') { // 上面已经处理了 null 的情况，所以这里不用担心 typeof null
+    context = new Object(context);
+  }
+  const fnKey = Symbol();
   // 当前的 this 就是这个函数， 绑定this的时候是 fn.myCall，fn调用的myCall，所以this就是fn
-  self.fn = this; // 把这个函数当做 fn 属性放在需要绑定 this 的对象中
+  self[fnKey] = this; // 把这个函数当做 fnKey 属性放在需要绑定 this 的对象中
   // 然后再通过这个对象去调用 fn 并把参数传递下去
-  const result = self.fn(...args);
+  const result = self[fnKey](...args);
   // 再通过 delete 把这个属性从这个对象中删除就好了
-  delete self.fn;
+  delete self[fnKey];
   // 返回 result 结果，call 是会立即执行该函数的
   return result;
 }

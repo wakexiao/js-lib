@@ -1,24 +1,24 @@
 /**
  * 实现类似 instanceof 方法
- * @param {object} left 需要判断的对象
- * @param {object} right 是否属于该原型对象
+ * @param {object} instance 需要判断的对象
+ * @param {object} origin 是否属于该原型对象
  * @return boolean
  */
-export default function instance_of(left, right){
-  const baseTypes = ['string', 'number', 'boolean', 'undefined', 'symbol'];
-  if(baseTypes.includes(typeof left)) return false;
-  let leftProto = left.__proto__;
-  let rightPrototype = right.prototype;
-  while(true){
-    if(leftProto === null) { // 已经通过原型链找到顶层 null 还没找到
-      return false;
+export default function instance_of(instance, origin){
+  // 处理 undefined 或 null
+  if(instance == null) return false;
+  // 处理基本数据类型
+  if(typeof instance !== 'object' && typeof instance !== 'function') return false;
+  const tempInstance = instance;
+  while(tempInstance) {
+    if(tempInstance.__proto__ === origin.prototype){
+       return true;
     }
-    if(leftProto === rightPrototype) {
-      return true;
-    }
-    // 没找到，再往上一层找
-    leftProto = leftProto.__proto__;
+    // 未匹配上 往上层继续找
+    tempInstance = tempInstance.__proto__;
   }
+  // 已经到最顶层 null，上方循环结束
+  return false;
 }
 
 
