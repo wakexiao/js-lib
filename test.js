@@ -127,24 +127,38 @@ box.addEventListener('drag', _.throttle((e) => {
 //   console.log(res1)
 // })
 
-console.log('第一步')
-const myP = new _.MyPromise((resolve, reject) => {
-  // console.log(this)
-  console.log('第二步')
-  // resolve('这次一定')
-  // throw Error('白嫖了')
-  // reject('这次一定')
-  setTimeout(() => {
-    resolve('这次一定')
-    console.log('第四步')
-  }, 3000)
-})
-myP.then((res) => {
-  console.log(res)
-  return '我要白嫖'
-}, (err) => {
-  console.log(err);
-}).then((res1) => {
-  console.log(res1) // 这里链式调用是使用的旧的 MyPromise 实例，需要返回一个新的 MyPromise 实例
-})
-console.log('第三步')
+// console.log('第一步')
+// const myP = new _.MyPromise((resolve, reject) => {
+//   // console.log(this)
+//   console.log('第二步')
+//   // resolve('这次一定')
+//   // throw Error('白嫖了')
+//   // reject('这次一定')
+//   setTimeout(() => {
+//     resolve('这次一定')
+//     console.log('第四步')
+//   }, 3000)
+// })
+// myP.then((res) => {
+//   console.log(res)
+//   return '我要白嫖'
+// }, (err) => {
+//   console.log(err);
+// }).then((res1) => {
+//   console.log(res1) // 这里链式调用是使用的旧的 MyPromise 实例，需要返回一个新的 MyPromise 实例
+// })
+// console.log('第三步')
+
+const arr= [
+  {id: 1, name: '部门A', parentId: 0},
+  {id: 2, name: '部门B', parentId: 0},
+  {id: 3, name: '部门C', parentId: 0},
+  {id: 4, name: '部门D', parentId: 1},
+  {id: 5, name: '部门E', parentId: 1},
+  {id: 6, name: '部门F', parentId: 3},
+  {id: 7, name: '部门G', parentId: 4},
+  {id: 8, name: '部门H', parentId: 7},
+  {id: 9, name: '部门I', parentId: 2},
+]
+console.log(_.convertToTree(arr))
+console.log(_.convertToArr(_.convertToTree(arr)))

@@ -9,6 +9,8 @@ import promiseAll from './promiseAll.js';
 import debounce from './debounce.js';
 import throttle from './throttle.js';
 import MyPromise from './promise.js';
+import convertToTree from './convertToTree.js'
+import convertToArr from './convertToArr.js';
 
 export default {
   ...getUrlParams,
@@ -22,4 +24,6 @@ export default {
   debounce,
   throttle,
   MyPromise,
+  convertToTree,
+  convertToArr,
 };
