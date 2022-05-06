@@ -11,6 +11,7 @@ import throttle from './throttle.js';
 import MyPromise from './promise.js';
 import convertToTree from './convertToTree.js'
 import convertToArr from './convertToArr.js';
+import arrayToLinkList from './arrayToLinkList.js';
 
 export default {
   ...getUrlParams,
@@ -26,4 +27,5 @@ export default {
   MyPromise,
   convertToTree,
   convertToArr,
+  arrayToLinkList,
 };

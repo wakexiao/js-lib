@@ -58,6 +58,7 @@
       <div></div>
       <div></div>
     </section>
+    <div id="box"></div>
     <script>
       function myCall(context, ...args) {
         const self = context || window;
@@ -238,6 +239,26 @@
         return nodes;
       }
       console.log(dfs2(tree))
+      
+      // for(var i = 0; i< 10; i++) {
+      //   const a = document.createElement('a');
+      //   a.innerHTML = i + '<br />'
+      //   a.setAttribute('number', i);
+      //   document.getElementById('box').appendChild(a);
+      // }
+      // document.getElementById('box').addEventListener('click', (e) => {
+      //   const data = e.target
+      //   console.log(e.target.getAttribute('number'))
+      // })
+
+      for(var i = 0; i< 10; i++) {
+        const a = document.createElement('a');
+        a.innerHTML = i + '<br />'
+        a.addEventListener('click', () => {
+          alert(i)
+        })
+        document.getElementById('box').appendChild(a);
+      }
     </script>
   </body>
 </html>

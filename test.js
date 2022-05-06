@@ -149,16 +149,19 @@ box.addEventListener('drag', _.throttle((e) => {
 // })
 // console.log('第三步')
 
-const arr= [
-  {id: 1, name: '部门A', parentId: 0},
-  {id: 2, name: '部门B', parentId: 0},
-  {id: 3, name: '部门C', parentId: 0},
-  {id: 4, name: '部门D', parentId: 1},
-  {id: 5, name: '部门E', parentId: 1},
-  {id: 6, name: '部门F', parentId: 3},
-  {id: 7, name: '部门G', parentId: 4},
-  {id: 8, name: '部门H', parentId: 7},
-  {id: 9, name: '部门I', parentId: 2},
-]
-console.log(_.convertToTree(arr))
-console.log(_.convertToArr(_.convertToTree(arr)))
+// const arr= [
+//   {id: 1, name: '部门A', parentId: 0},
+//   {id: 2, name: '部门B', parentId: 0},
+//   {id: 3, name: '部门C', parentId: 0},
+//   {id: 4, name: '部门D', parentId: 1},
+//   {id: 5, name: '部门E', parentId: 1},
+//   {id: 6, name: '部门F', parentId: 3},
+//   {id: 7, name: '部门G', parentId: 4},
+//   {id: 8, name: '部门H', parentId: 7},
+//   {id: 9, name: '部门I', parentId: 2},
+// ]
+// console.log(_.convertToTree(arr))
+// console.log(_.convertToArr(_.convertToTree(arr)))
+
+const arr = [100, 200, 300, 400]
+console.log(_.arrayToLinkList(arr))
