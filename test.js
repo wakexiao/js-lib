@@ -111,10 +111,10 @@ function testFetch(url, params) {
 }
 const searchInput = document.getElementById('search');
 const box = document.getElementById('box');
-searchInput.addEventListener('input', _.debounce((e) => {
+searchInput?.addEventListener('input', _.debounce((e) => {
   testFetch('/search', {search})
 }, 1000));
-box.addEventListener('drag', _.throttle((e) => {
+box?.addEventListener('drag', _.throttle((e) => {
   console.log(e.offsetX, e.offsetY)
 }, 100))
 
