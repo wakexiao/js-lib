@@ -10,11 +10,11 @@ function resolve(dir) {
 const config = {
   mode: 'development',
   entry: {
-    main: './src/index.ts',
+    index: './src/index.ts', // 入口js文件，key 是文件名
   },
   output: {
     path: resolve('dist'),
-    filename: '[name].[contenthash:8].js',
+    filename: '[name].[contenthash:8].js', // name 是上面 entry 定义的 key
   },
   module: {
     rules: [
