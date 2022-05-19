@@ -1,2 +1,2 @@
 // import './structure/reverseLinkList';
-import './js-lib/deepClone'
+import './js-lib/evnetBus'

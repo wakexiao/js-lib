@@ -47,6 +47,21 @@
         height: 500px;
         background: #000;
       }
+      #flexbox{
+        width: 100px;
+        height: 100px;
+        background: green;
+        display: flex;
+        justify-content: space-between;
+      }
+      #flexbox div{
+        width: 20px;
+        height: 20px;
+        background: red;
+      }
+      #flexbox div:nth-child(2){
+        align-self: flex-end;
+      }
     </style>
   </head>
   <body>
@@ -59,6 +74,10 @@
       <div></div>
     </section>
     <div id="box"></div>
+    <div id="flexbox">
+      <div></div>
+      <div></div>
+    </div>
     <script>
       function myCall(context, ...args) {
         const self = context || window;
