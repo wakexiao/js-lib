@@ -1,2 +1,2 @@
 // import './structure/reverseLinkList';
-import './js-lib/fibonacci'
+import './js-lib/binarySearch'

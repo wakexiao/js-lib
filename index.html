@@ -106,5 +106,20 @@
       </div>
     </div>
     <script type="module" src="./test.js"></script>
+    <script>
+      function foo() {
+          console.log(a);	// 输出 2，作用域是在函数定义的时候确定的，this是在函数调用的时候确定的
+      }
+
+      function bar() {
+          var a = 3;
+          foo();
+      }
+
+      var a = 2;
+      bar();
+      // js 只有词法作用域，没有动态作用域
+    </script>
   </body>
 </html>
+  
