@@ -1,2 +1,2 @@
 // import './structure/reverseLinkList';
-import './js-lib/binarySearch'
+import './js-lib/twoNumberSum'
